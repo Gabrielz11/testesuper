@@ -1,0 +1,37 @@
+
+create table USUARIO(
+            id INT(11), 
+            cpf VARCHAR(255) primary key, 
+            nome VARCHAR(50));
+
+INSERT INTO USUARIO 
+VALUES
+   (1,'16798125050', 'Luke Skywalke'),
+   (2,'59875804045', 'Bruce Wayne'),
+   (3,'04707649025', 'Diane Prince'),
+   (4,'21142450040', 'Bruce Banner'),
+   (5,'83257946074', 'Harley Quinn'),
+   (6,'07583509025', 'Peter Parke');
+
+create table INFO(
+            id INT(11) primary key,
+            cpf VARCHAR(255),
+            genero VARCHAR(50),
+            ano_nascimento YEAR(4));
+
+INSERT INTO INFO VALUES
+   (1,'16798125050', 'M','1976'),
+   (2,'59875804045', 'M','1960'),
+   (3,'04707649025', 'F','1988'),
+   (4,'21142450040', 'M','1954'),
+   (5,'83257946074', 'F','1970'),
+   (6,'07583509025', 'M','1972');
+   
+create table resultado(usuario VARCHAR(50),maior_50_anos VARCHAR(50));
+   
+INSERT INTO 
+   resultado (usuario,maior_50_anos) 
+   SELECT CONCAT(USUARIO.NOME," - ", INFO.GENERO), IF(INFO.ano_nascimento<'1972',"SIM","NÃO") FROM USUARIO 
+   INNER JOIN INFO ON USUARIO.CPF = INFO.CPF;
+   
+select * from resultado;
